@@ -35,52 +35,48 @@ function TaskList({
   };
 
   return (
-    <div>
-      {tasks.map((task) => (
-        <div
-          key={task._id}
-          className="task-card"
+   <div>
+  {tasks.map((task) => (
+    <div
+      key={task._id}
+      className={`task-card ${
+        task.completed ? "completed" : ""
+      }`}
+    >
+      <h3>{task.title}</h3>
+
+      <p>
+        {task.completed
+          ? " Completed"
+          : " Pending"}
+      </p>
+
+      {task.dueDate && (
+        <p>
+           {new Date(task.dueDate).toLocaleString()}
+        </p>
+      )}
+
+      <div className="task-actions">
+        <button
+          className="complete-btn"
+          onClick={() => toggleComplete(task)}
         >
-          <h3>{task.title}</h3>
+          {task.completed
+            ? "Undo"
+            : "Complete"}
+        </button>
 
-          <p>
-            Status:
-            {" "}
-            {task.completed
-              ? "Completed"
-              : "Pending"}
-          </p>
-
-          {task.dueDate && (
-            <p>
-              Due:
-              {" "}
-              {new Date(
-                task.dueDate
-              ).toLocaleString()}
-            </p>
-          )}
-
-          <button
-            onClick={() =>
-              toggleComplete(task)
-            }
-          >
-            {task.completed
-              ? "Undo"
-              : "Complete"}
-          </button>
-
-          <button
-            onClick={() =>
-              deleteTask(task._id)
-            }
-          >
-            Delete
-          </button>
-        </div>
-      ))}
+        <button
+          className="delete-btn"
+          onClick={() => deleteTask(task._id)}
+        >
+          Delete
+        </button>
+      </div>
     </div>
+  ))}
+</div>
   );
 }
 
