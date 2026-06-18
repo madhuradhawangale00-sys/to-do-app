@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import TaskForm from "./components/TaskForm";
+import TaskList from "./components/TaskList";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/api/tasks"
+      );
+      setTasks(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>To-Do App</h1>
+
+      <TaskForm fetchTasks={fetchTasks} />
+
+      <TaskList
+        tasks={tasks}
+        fetchTasks={fetchTasks}
+      />
     </div>
   );
 }
