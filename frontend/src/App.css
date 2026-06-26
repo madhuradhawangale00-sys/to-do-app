@@ -57,6 +57,7 @@ button {
   cursor: pointer;
   transition: 0.3s;
   font-weight: bold;
+  background: #2563eb;
 }
 
 form button {
