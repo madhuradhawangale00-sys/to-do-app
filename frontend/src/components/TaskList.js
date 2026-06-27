@@ -8,7 +8,7 @@ function TaskList({
   const deleteTask = async (id) => {
     try {
       await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/tasks${id}`
+        `${process.env.REACT_APP_API_URL}/api/tasks/${id}`
       );
 
       fetchTasks();
@@ -22,7 +22,7 @@ function TaskList({
   ) => {
     try {
       await axios.patch(
-        `${process.env.REACT_APP_API_URL}/api/tasks${task._id}`,
+        `${process.env.REACT_APP_API_URL}/api/tasks/${task._id}`,
         {
           completed: !task.completed,
         }
