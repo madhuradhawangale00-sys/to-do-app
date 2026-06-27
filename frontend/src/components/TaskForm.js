@@ -12,7 +12,7 @@ function TaskForm({ fetchTasks }) {
 
     try {
       await axios.post(
-        "http://localhost:4000/api/tasks",
+        `${process.env.REACT_APP_API_URL}/api/tasks`,
         {
           title,
           dueDate,
