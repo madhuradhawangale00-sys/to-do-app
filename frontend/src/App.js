@@ -9,7 +9,7 @@ function App() {
   const fetchTasks = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/tasks"
+        "https://todo-backend-xxxx.onrender.com/api/tasks"
       );
       setTasks(response.data);
     } catch (error) {
